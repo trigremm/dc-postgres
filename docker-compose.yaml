@@ -13,4 +13,4 @@ services:
       - "5432:5432"
     restart: always
     volumes:
-      - ./docker/postgres:/var/lib/postgresql/data
+      - ./.docker/postgres:/var/lib/postgresql/data
