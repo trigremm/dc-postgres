@@ -1,0 +1,26 @@
+echo "export $(cat .env.postgres | grep POSTGRES_USER)"
+echo "export $(cat .env.postgres | grep POSTGRES_PASSWORD)"
+echo "export $(cat .env.postgres | grep POSTGRES_DB)"
+
+export POSTGRES_HOST=example.com
+export POSTGRES_PORT=5432
+
+PGPASSWORD=${POSTGRES_PASSWORD} createdb \
+    -h ${POSTGRES_HOST} \
+    -p ${POSTGRES_PORT} \
+    -U ${POSTGRES_USER} \
+    -d ${POSTGRES_DB} \
+    -O ${POSTGRES_USER} \ 
+    -E UTF8 
+
+PGPASSWORD=${POSTGRES_PASSWORD} psql \
+    -h ${POSTGRES_HOST} \
+    -p ${POSTGRES_PORT} \
+    -U ${POSTGRES_USER} \
+    -d ${POSTGRES_DB} < ~/employees-database/employees_data.sql
+
+
+PGPASSWORD=${POSTGRES_PASSWORD} \
+PGHOST=${POSTGRES_HOST} \
+PGUSER=${POSTGRES_USER} \
+dropdb --if-exists ${POSTGRES_DB}

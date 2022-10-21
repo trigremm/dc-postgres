@@ -1,16 +1,12 @@
 version: "3.9"
 services:
-
   postgres:
-    image: postgres:14-bullseye
+    image: postgres:15-bullseye
     platform: linux/amd64
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      TZ: "Asia/Almaty"
+    env_file:
+      - .env.postgres
     ports:
       - "5432:5432"
     restart: always
     volumes:
-      - ./.docker/postgres:/var/lib/postgresql/data
+      - ./.docker-storage/postgres:/var/lib/postgresql/data
