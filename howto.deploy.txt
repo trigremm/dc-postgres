@@ -1,0 +1,5 @@
+# cp .env.postgres.example .env.postgres
+
+docker-compose up -d --build
+
+# PGPASSWORD=${POSTGRES_PASSWORD} psql -h localhost -p 5432 -U postgres -d postgres -c "CREATE DATABASE cmca;"
